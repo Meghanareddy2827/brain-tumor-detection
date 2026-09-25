@@ -1,6 +1,7 @@
 import os
 import io
 import base64
+import gdown
 
 import numpy as np
 import tensorflow as tf
@@ -50,11 +51,31 @@ CLASS_INFO = {
 # LOAD MODEL
 # ============================================================
 
-MODEL_PATH = os.path.join(
+MODEL_DIR = os.path.join(
     os.path.dirname(__file__),
-    "model",
+    "model"
+)
+
+MODEL_PATH = os.path.join(
+    MODEL_DIR,
     "InceptionResNetV2_BrainTumor.keras"
 )
+
+MODEL_FILE_ID = "1afPJnW6qZvrfqKBPkzaaSNzfXgy9dETP"
+
+if not os.path.exists(MODEL_PATH):
+    print("Model not found locally.")
+    print("Downloading model from Google Drive...")
+
+    os.makedirs(MODEL_DIR, exist_ok=True)
+
+    gdown.download(
+        id=MODEL_FILE_ID,
+        output=MODEL_PATH,
+        quiet=False
+    )
+
+    print("Model download completed.")
 
 print("=" * 60)
 print("Brain Tumor MRI Detection")

@@ -4,3 +4,4 @@ flask-cors
 pillow
 numpy
 gunicorn
+gdown
